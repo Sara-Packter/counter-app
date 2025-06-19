@@ -11,6 +11,11 @@ app.use(bodyParser.json());
 const users = {};  // { username: { passwordHash, highscore } }
 const JWT_SECRET = 'secret123'; // לשימוש דוגמה בלבד
 
+// ✅ מוסיפים מסלול ל־/ כדי ש-Render יזהה שהשרת פעיל
+app.get('/', (req, res) => {
+  res.send('Server is up and running!');
+});
+
 // הרשמה
 app.post('/register', async (req, res) => {
   const { username, password } = req.body;
@@ -49,4 +54,5 @@ app.get('/highscore/:username', (req, res) => {
   res.json({ highscore: user.highscore });
 });
 
+// מאזינים על פורט 3000 (Render מפנה אוטומטית את זה ל-URL שלך)
 app.listen(3000, () => console.log('Server running on port 3000'));
